@@ -1,0 +1,134 @@
+:root {
+    --primary-color: #1e3a8a;
+    --border-color: #cbd5e1;
+    --label-bg: #f8fafc;
+    --text-main: #334155;
+}
+
+body {
+    font-family: 'Noto Sans Thai', 'Noto Sans SC', sans-serif;
+    background-color: #f1f5f9;
+    color: var(--text-main);
+
+    /* ทำให้ background พิมพ์ออกมาตรง */
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+}
+
+.a4-paper {
+    width: 210mm;
+    min-height: 297mm;
+    padding: 15mm 20mm;
+    margin: 10mm auto;
+    background: white;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+    position: relative;
+}
+
+.form-header {
+    border-bottom: 3px solid var(--primary-color);
+    margin-bottom: 20px;
+    padding-bottom: 10px;
+}
+
+.section-title {
+    background-color: var(--primary-color);
+    color: white;
+    padding: 6px 12px;
+    font-size: 0.9rem;
+    font-weight: bold;
+    border-radius: 4px;
+    display: inline-block;
+    margin-bottom: 8px;
+    letter-spacing: 0.5px;
+}
+
+.resume-table {
+    width: 100%;
+    border-collapse: collapse;
+    border: 1px solid var(--border-color);
+    margin-bottom: 20px;
+}
+
+.resume-table td, .resume-table th {
+    border: 1px solid var(--border-color);
+    padding: 0;
+    vertical-align: middle;
+}
+
+.label-cell {
+    background-color: var(--label-bg);
+    width: 18%;
+    padding: 8px 4px;
+    text-align: center;
+}
+
+.label-cn { font-size: 0.9rem; font-weight: 700; color: #0f172a; display: block; }
+.label-pinyin { font-size: 0.65rem; color: #64748b; display: block; margin-top: -2px; }
+.label-th { font-size: 0.75rem; color: #475569; display: block; margin-top: 2px; }
+
+.input-field {
+    width: 100%;
+    min-height: 35px;
+    border: none;
+    padding: 5px 10px;
+    font-size: 0.9rem;
+    background: transparent;
+}
+
+.input-field:focus {
+    background-color: #eff6ff;
+    box-shadow: inset 0 -2px 0 var(--primary-color);
+}
+
+.input-center { text-align: center; }
+
+/* Photo box */
+.photo-box {
+    width: 100%;
+    min-height: 160px;
+    background-color: #f8fafc;
+    border: 2px dashed #cbd5e1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    overflow: hidden;
+}
+
+.photo-box img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+
+@media print {
+
+    body {
+        background: white !important;
+
+        -webkit-print-color-adjust: exact;
+        print-color-adjust: exact;
+    }
+
+    .a4-paper {
+        box-shadow: none;
+        width: 100%;
+        margin: 0;
+        padding: 0;
+    }
+
+    .no-print { display: none !important; }
+
+    .input-field {
+        background: transparent !important;
+        box-shadow: none !important;
+    }
+
+    .section-title,
+    .label-cell {
+        -webkit-print-color-adjust: exact;
+        print-color-adjust: exact;
+    }
+}
