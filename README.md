@@ -1,0 +1,442 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Resume - Full Info & Skills</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@300;400;500;700&family=Noto+Sans+Thai:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary-color: #1e3a8a; /* Dark Blue */
+            --border-color: #cbd5e1; /* Slate 300 */
+            --label-bg: #f8fafc; /* Slate 50 */
+            --text-main: #334155; /* Slate 700 */
+        }
+
+        body {
+            font-family: 'Noto Sans Thai', 'Noto Sans SC', sans-serif;
+            background-color: #f1f5f9;
+            color: var(--text-main);
+            -webkit-print-color-adjust: exact;
+            print-color-adjust: exact;
+        }
+
+        .a4-paper {
+            width: 210mm;
+            min-height: 297mm;
+            padding: 15mm 20mm;
+            margin: 10mm auto;
+            background: white;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.08); 
+            position: relative;
+        }
+
+        /* Form Styling */
+        .form-header {
+            border-bottom: 3px solid var(--primary-color);
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+        }
+
+        .section-title {
+            background-color: var(--primary-color);
+            color: white;
+            padding: 6px 12px;
+            font-size: 0.9rem;
+            font-weight: bold;
+            border-radius: 4px;
+            display: inline-block;
+            margin-bottom: 8px;
+            letter-spacing: 0.5px;
+        }
+
+        /* Table Grid Styling */
+        .resume-table {
+            width: 100%;
+            border-collapse: collapse;
+            border: 1px solid var(--border-color);
+            margin-bottom: 20px;
+        }
+
+        .resume-table td, .resume-table th {
+            border: 1px solid var(--border-color);
+            padding: 0;
+            vertical-align: middle;
+        }
+
+        .label-cell {
+            background-color: var(--label-bg);
+            width: 18%;
+            padding: 8px 4px;
+            text-align: center;
+            vertical-align: middle;
+        }
+
+        .input-cell {
+            background-color: white;
+            position: relative;
+        }
+
+        /* Text Styling */
+        .label-cn { font-size: 0.9rem; font-weight: 700; color: #0f172a; display: block; }
+        .label-pinyin { font-size: 0.65rem; color: #64748b; font-weight: 400; display: block; margin-top: -2px; }
+        .label-th { font-size: 0.75rem; color: #475569; display: block; margin-top: 2px; }
+
+        /* Input Fields */
+        .input-field {
+            width: 100%;
+            height: 100%;
+            min-height: 35px;
+            border: none;
+            padding: 5px 10px;
+            outline: none;
+            background: transparent;
+            text-align: left;
+            font-size: 0.9rem;
+            color: #000;
+            transition: background 0.2s;
+        }
+        .input-field:focus {
+            background-color: #eff6ff;
+            box-shadow: inset 0 -2px 0 var(--primary-color);
+        }
+        .input-center { text-align: center; }
+
+        /* Photo Upload Area */
+        .photo-box {
+            width: 100%;
+            height: 100%;
+            min-height: 160px; /* Adjusted height */
+            background-color: #f8fafc;
+            border: 2px dashed #cbd5e1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            overflow: hidden;
+            position: relative;
+            transition: all 0.3s;
+        }
+        .photo-box:hover {
+            border-color: var(--primary-color);
+            background-color: #eff6ff;
+        }
+        .photo-box img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        /* Print Settings */
+        @media print {
+            body { background: white; margin: 0; }
+            .a4-paper { margin: 0; box-shadow: none; width: 100%; padding: 0; height: auto; border: none; }
+            .no-print { display: none !important; }
+            .input-field { background: transparent !important; box-shadow: none !important; }
+            .has-photo { border: 1px solid #cbd5e1 !important; }
+            ::placeholder { color: transparent; }
+            .section-title { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+            .label-cell { background-color: #f8fafc !important; -webkit-print-color-adjust: exact; }
+            .bg-slate-100 { background-color: #f1f5f9 !important; -webkit-print-color-adjust: exact; }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="fixed top-6 right-6 flex flex-col gap-3 no-print z-50">
+        <button onclick="window.print()" class="bg-indigo-600 hover:bg-indigo-700 text-white px-5 py-2.5 rounded-full shadow-lg flex items-center justify-center gap-2 transition transform hover:scale-105 font-medium">
+            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 17h2a2 2 0 002-2v-4a2 2 0 00-2-2H5a2 2 0 00-2 2v4a2 2 0 002 2h2m2 4h6a2 2 0 002-2v-4a2 2 0 00-2-2H9a2 2 0 00-2 2v4a2 2 0 002 2zm8-12V5a2 2 0 00-2-2H9a2 2 0 00-2 2v4h10z"></path></svg>
+            พิมพ์ / บันทึก PDF
+        </button>
+        <button onclick="clearForm()" class="bg-white hover:bg-red-50 text-red-600 border border-red-200 px-5 py-2.5 rounded-full shadow-md flex items-center justify-center gap-2 transition text-sm">
+            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"></path></svg>
+            ล้างข้อมูล
+        </button>
+    </div>
+
+    <div class="a4-paper">
+        
+        <div class="form-header text-center">
+            <h1 class="text-3xl font-bold text-slate-800 tracking-wide">个人简历</h1>
+            <div class="text-sm text-slate-500 mt-1 uppercase tracking-widest">Curriculum Vitae</div>
+        </div>
+
+        <div class="mb-4">
+            <div class="section-title">基本信息 / ข้อมูลส่วนตัว</div>
+            <table class="resume-table">
+                <tbody>
+                    <tr>
+                        <td class="label-cell">
+                            <span class="label-cn">姓名</span>
+                            <span class="label-pinyin">xìngmíng</span>
+                            <span class="label-th">ชื่อ-นามสกุล</span>
+                        </td>
+                        <td class="input-cell" style="width: 25%;">
+                            <input type="text" class="input-field input-center" placeholder="Chinese / English">
+                        </td>
+                        <td class="label-cell">
+                            <span class="label-cn">性别</span>
+                            <span class="label-pinyin">xìngbié</span>
+                            <span class="label-th">เพศ</span>
+                        </td>
+                        <td class="input-cell" style="width: 20%;">
+                            <select class="input-field input-center appearance-none cursor-pointer">
+                                <option value=""></option>
+                                <option value="男">男 (Male)</option>
+                                <option value="女">女 (Female)</option>
+                            </select>
+                        </td>
+                        <td rowspan="4" style="width: 20%; padding: 5px; vertical-align: top; border-left: 1px solid #cbd5e1;">
+                            <div class="photo-box" id="photo-container" onclick="triggerPhotoUpload()">
+                                <input type="file" id="photo-upload" class="hidden" accept="image/*" onchange="previewImage(event)">
+                                <img id="photo-preview" src="" class="hidden">
+                                <div id="photo-placeholder" class="text-center p-2">
+                                    <svg class="w-8 h-8 mx-auto text-slate-300 mb-1" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"></path></svg>
+                                    <span class="block text-xs text-slate-400 font-bold">照片</span>
+                                    <span class="block text-[10px] text-slate-400">รูปถ่าย</span>
+                                </div>
+                            </div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="label-cell">
+                            <span class="label-cn">出生日期</span>
+                            <span class="label-pinyin">chūshēng rìqī</span>
+                            <span class="label-th">วันเกิด</span>
+                        </td>
+                        <td class="input-cell" colspan="3">
+                            <input type="date" class="input-field text-slate-600">
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="label-cell">
+                            <span class="label-cn">国籍</span>
+                            <span class="label-pinyin">guójí</span>
+                            <span class="label-th">สัญชาติ</span>
+                        </td>
+                        <td class="input-cell">
+                            <input type="text" class="input-field input-center" value="泰 (Thai)">
+                        </td>
+                        <td class="label-cell">
+                            <span class="label-cn">学历</span>
+                            <span class="label-pinyin">xuélì</span>
+                            <span class="label-th">วุฒิการศึกษา</span>
+                        </td>
+                        <td class="input-cell">
+                            <input type="text" class="input-field input-center" placeholder="ปริญญาตรี">
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="label-cell">
+                            <span class="label-cn">现居地</span>
+                            <span class="label-pinyin">xiàn jū dì</span>
+                            <span class="label-th">ที่อยู่ปัจจุบัน</span>
+                        </td>
+                        <td class="input-cell" colspan="3">
+                            <input type="text" class="input-field" placeholder="Bangkok / 曼谷">
+                        </td>
+                    </tr>
+                    
+                    <tr>
+                        <td class="label-cell">
+                            <span class="label-cn">毕业学校</span>
+                            <span class="label-pinyin">bìyè xuéxiào</span>
+                            <span class="label-th">โรงเรียนที่จบ</span>
+                        </td>
+                        <td class="input-cell" colspan="2">
+                            <input type="text" class="input-field" placeholder="ระบุชื่อมหาวิทยาลัย...">
+                        </td>
+                        <td class="label-cell">
+                            <span class="label-cn">专业</span>
+                            <span class="label-pinyin">zhuānyè</span>
+                            <span class="label-th">สาขาวิชา</span>
+                        </td>
+                        <td class="input-cell">
+                            <input type="text" class="input-field input-center" placeholder="ระบุคณะ/สาขา...">
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <td class="label-cell">
+                            <span class="label-cn">联系电话</span>
+                            <span class="label-pinyin">liánxì diànhuà</span>
+                            <span class="label-th">เบอร์โทร</span>
+                        </td>
+                        <td class="input-cell" colspan="2">
+                            <input type="tel" class="input-field">
+                        </td>
+                        <td class="label-cell">
+                            <span class="label-cn">电子邮箱</span>
+                            <span class="label-pinyin">diànzǐ yóujiàn</span>
+                            <span class="label-th">อีเมล</span>
+                        </td>
+                        <td class="input-cell">
+                            <input type="email" class="input-field input-center">
+                        </td>
+                    </tr>
+                    
+                    <tr>
+                        <td class="label-cell" style="border-right: 3px double var(--border-color);">
+                            <span class="label-cn">求职意向</span>
+                            <span class="label-pinyin">qiúzhí yìxiàng</span>
+                            <span class="label-th">ตำแหน่งที่สมัคร</span>
+                        </td>
+                        <td class="input-cell" colspan="4">
+                            <input type="text" class="input-field font-bold text-indigo-900" placeholder="ระบุตำแหน่งที่ต้องการสมัคร...">
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <div class="mb-4">
+            <div class="section-title">技能特长 / ความสามารถพิเศษ</div>
+            <table class="resume-table">
+                <tbody>
+                    <tr>
+                        <td class="label-cell">
+                            <span class="label-cn">语言能力</span>
+                            <span class="label-pinyin">yǔyán nénglì</span>
+                            <span class="label-th">ภาษา</span>
+                        </td>
+                        <td class="input-cell p-2">
+                            <input type="text" class="input-field" placeholder="Ex: Chinese (HSK5), English (Conversational)">
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="label-cell">
+                            <span class="label-cn">计算机能力</span>
+                            <span class="label-pinyin">jìsuànjī nénglì</span>
+                            <span class="label-th">คอมพิวเตอร์</span>
+                        </td>
+                        <td class="input-cell p-2">
+                            <input type="text" class="input-field" placeholder="Ex: MS Office, Photoshop, Programming">
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="label-cell">
+                            <span class="label-cn">其他技能</span>
+                            <span class="label-pinyin">qítā jìnéng</span>
+                            <span class="label-th">ความสามารถอื่นๆ</span>
+                        </td>
+                        <td class="input-cell p-2">
+                            <input type="text" class="input-field" placeholder="Ex: Driving License, First Aid Certificate">
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="label-cell">
+                            <span class="label-cn">特长爱好</span>
+                            <span class="label-pinyin">tècháng àihào</span>
+                            <span class="label-th">งานอดิเรก</span>
+                        </td>
+                        <td class="input-cell p-2">
+                            <input type="text" class="input-field" placeholder="Ex: Photography, Reading, Sports">
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <div class="mb-4">
+            <div class="section-title">教育背景 / ประวัติการศึกษา</div>
+            <table class="resume-table">
+                <thead>
+                    <tr class="bg-slate-100">
+                        <th class="p-2 border border-slate-300 w-1/4 text-xs font-bold text-slate-700">时间 (ระยะเวลา)</th>
+                        <th class="p-2 border border-slate-300 w-2/5 text-xs font-bold text-slate-700">学校名称 (ชื่อสถานศึกษา)</th>
+                        <th class="p-2 border border-slate-300 w-1/3 text-xs font-bold text-slate-700">专业 / 学历 (สาขา / วุฒิ)</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr><td class="input-cell h-9"><input class="input-field input-center" placeholder="YYYY - YYYY"></td><td class="input-cell"><input class="input-field input-center"></td><td class="input-cell"><input class="input-field input-center"></td></tr>
+                    <tr><td class="input-cell h-9"><input class="input-field input-center"></td><td class="input-cell"><input class="input-field input-center"></td><td class="input-cell"><input class="input-field input-center"></td></tr>
+                    <tr><td class="input-cell h-9"><input class="input-field input-center"></td><td class="input-cell"><input class="input-field input-center"></td><td class="input-cell"><input class="input-field input-center"></td></tr>
+                </tbody>
+            </table>
+        </div>
+
+        <div class="mb-4">
+            <div class="section-title">工作经历 / ประวัติการทำงาน</div>
+            <table class="resume-table">
+                <thead>
+                    <tr class="bg-slate-100">
+                        <th class="p-2 border border-slate-300 w-1/4 text-xs font-bold text-slate-700">时间 (ระยะเวลา)</th>
+                        <th class="p-2 border border-slate-300 w-1/3 text-xs font-bold text-slate-700">公司名称 (ชื่อบริษัท)</th>
+                        <th class="p-2 border border-slate-300 w-5/12 text-xs font-bold text-slate-700">职位 / 职责 (ตำแหน่ง / หน้าที่)</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr><td class="input-cell h-10"><input class="input-field input-center" placeholder="YYYY - YYYY"></td><td class="input-cell"><input class="input-field input-center"></td><td class="input-cell"><input class="input-field input-center"></td></tr>
+                    <tr><td class="input-cell h-10"><input class="input-field input-center"></td><td class="input-cell"><input class="input-field input-center"></td><td class="input-cell"><input class="input-field input-center"></td></tr>
+                    <tr><td class="input-cell h-10"><input class="input-field input-center"></td><td class="input-cell"><input class="input-field input-center"></td><td class="input-cell"><input class="input-field input-center"></td></tr>
+                </tbody>
+            </table>
+        </div>
+
+        <div class="mb-4">
+            <div class="section-title">自我评价 / แนะนำตนเอง</div>
+            <div class="border border-slate-300 bg-white p-1 min-h-[100px]">
+                <textarea class="input-field w-full h-full resize-none text-sm leading-relaxed p-2" 
+                    placeholder="แนะนำจุดแข็งของคุณ (Strength) หรือทัศนคติในการทำงาน..."></textarea>
+            </div>
+        </div>
+
+        <div class="flex justify-end mt-8">
+            <div class="text-right pr-12">
+                <div class="mb-4 text-slate-800">
+                    <span class="font-bold mr-2 text-sm">签名 (ลงชื่อ):</span>
+                    <span class="inline-block w-48 border-b border-slate-400"></span>
+                </div>
+                <div class="text-slate-800">
+                    <span class="font-bold mr-2 text-sm">日期 (วันที่):</span>
+                    <input type="date" class="inline-block bg-transparent border-b border-slate-400 text-center text-sm focus:outline-none" style="width: 180px;">
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <script>
+        function triggerPhotoUpload() {
+            document.getElementById('photo-upload').click();
+        }
+
+        function previewImage(event) {
+            const reader = new FileReader();
+            const preview = document.getElementById('photo-preview');
+            const placeholder = document.getElementById('photo-placeholder');
+            const container = document.getElementById('photo-container');
+            
+            reader.onload = function() {
+                preview.src = reader.result;
+                preview.classList.remove('hidden');
+                placeholder.classList.add('hidden');
+                container.classList.add('has-photo');
+                container.style.borderStyle = 'solid';
+            }
+            
+            if (event.target.files[0]) {
+                reader.readAsDataURL(event.target.files[0]);
+            }
+        }
+
+        function clearForm() {
+            if(confirm('ต้องการล้างข้อมูลทั้งหมดใช่หรือไม่?')) {
+                const inputs = document.querySelectorAll('input, select, textarea');
+                inputs.forEach(input => input.value = '');
+                
+                const preview = document.getElementById('photo-preview');
+                const placeholder = document.getElementById('photo-placeholder');
+                const container = document.getElementById('photo-container');
+                
+                preview.src = '';
+                preview.classList.add('hidden');
+                placeholder.classList.remove('hidden');
+                container.classList.remove('has-photo');
+                container.style.borderStyle = 'dashed';
+            }
+        }
+    </script>
+</body>
+</html>
